@@ -1,167 +1,323 @@
+# Blog Writing Firebase - React
 
 ![Screenshot 2024-09-03 at 23 22 58](https://github.com/user-attachments/assets/59add876-b826-4fba-9793-d6bf6b1dfd52) ![Screenshot 2024-09-03 at 23 23 38](https://github.com/user-attachments/assets/53dcf74f-9308-4bf4-a2c0-6e340441c870) ![Screenshot 2024-09-03 at 23 24 01](https://github.com/user-attachments/assets/51013f88-5c43-4d7a-b889-acf62cc8aafe)
 
-## BlogWriting-Firebase-ReactWebpage
+---
 
-BlogWriting is a simple Firebase React Web Application that mainly focuses on Firebase Setup, Configuration,  Authentication, Provider, and Firestore Database to retrieve the data from the database and then display, create, and delete the data, using React-Loading-Skeleton, TailwindCSS, JavaScript, HTML and deploy on Netfily.
+## Project Summary
 
-**The webpage can be seen by using this URL:** https://blogwriting-arnob.netlify.app
+BlogWriting-Firebase-ReactWebpage is a modern web application for writing, publishing, and managing blog posts, built using ReactJS and Firebase (Firestore, Authentication). It demonstrates a full-stack workflow of a blog platform with Google Authentication, serverless backend, and dynamic UI using React, TailwindCSS, and React Loading Skeletons. The app is a great learning resource for Firebase integration, protected routes, CRUD operations, and deploying on Netlify.
 
-## To Install Dependences
+- **Live-demo:** [https://blogwriting-arnob.netlify.app](https://blogwriting-arnob.netlify.app)
 
-Before launching this web application, be sure to install all required dependencies, which are listed in the package.json file.
+---
 
-To install all dependences, run this command from your project folder: `npm install`
+## Table of Contents
 
-## To Install NodeJS
+- [Project Summary](#project-summary)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+  - [Install Dependencies](#install-dependencies)
+  - [Setup Environment Variables](#setup-environment-variables)
+  - [Run the Application](#run-the-application)
+  - [Build & Deployment](#build--deployment)
+- [Application Walkthrough](#application-walkthrough)
+- [Core Components & Key Files](#core-components--key-files)
+- [API & Firebase Usage](#api--firebase-usage)
+- [Routing & Protected Routes](#routing--protected-routes)
+- [Examples](#examples)
+- [Deployment Notes](#deployment-notes)
+- [Learning Purpose](#learning-purpose)
+- [Keywords](#keywords)
+- [Conclusion](#conclusion)
+- [Happy Coding!](#happy-coding)
 
-Make sure you have NodeJS installed in your machine first, The installation instructions are here: https://nodejs.org/en/
+---
 
-## To Install React-Router
+## Features
 
-Open up your terminal and bootstrap a new React app by: `npx create-react-app`
+- **Google Authentication:** Secure login with Google using Firebase Auth.
+- **Create, Read, and Delete Blog Posts:** Interact with Firestore DB in real time.
+- **Responsive UI:** Built with TailwindCSS, custom CSS, and skeleton loaders.
+- **Protected Routes:** Only authenticated users can create posts.
+- **Environment Variables:** Secure API keys and sensitive config.
+- **Fast Deployment:** Easily deployed to Netlify.
+- **Code Splitting & Progressive Web App** (PWA) ready via React best practices.
 
-Then go to that project folder, and write this command via terminal from your project folder: `npm i react-router-dom`
+---
 
-(For more details, visit: https://reactrouter.com/en/main and https://www.npmjs.com/package/react-router-dom )
+## Project Structure
 
-## To Install Firebase
+```
+BlogWriting-Firebase--ReactJS/
+│
+├── public/
+│   └── index.html
+├── src/
+│   ├── App.js
+│   ├── App.css
+│   ├── index.js
+│   ├── index.css
+│   ├── firebase/
+│   │   └── config.js
+│   ├── hooks/
+│   │   └── useTitle.js
+│   ├── components/
+│   │   ├── Header.js
+│   │   ├── Footer.js
+│   │   ├── PostCard.js
+│   │   └── SkeletonCard.js
+│   ├── pages/
+│   │   ├── HomePage.js
+│   │   ├── CreatePost.js
+│   │   └── PageNotFound.js
+│   └── routes/
+│       ├── AllRoutes.js
+│       └── ProtectedRoutes.js
+├── .env.example
+├── package.json
+└── README.md
+```
+*Note: Only top-level and key files listed. More files may exist. [View all files on GitHub ›](https://github.com/arnobt78/BlogWriting-Firebase--ReactJS)*
 
-Open up your terminal from your project folder and run: `npm install --save firebase@9.10`
+---
 
-**Note:** You must install firebase version 9.10, beacuse the later versions can occure error while initializing firebase.
+## Technologies Used
 
-(For more info, visit: https://www.npmjs.com/package/firebase )
+- **ReactJS** (with hooks)
+- **Firebase** (Firestore, Auth, Google Provider)
+- **React Router DOM**
+- **TailwindCSS**
+- **React Loading Skeleton**
+- **JavaScript (ES6+)**
+- **HTML & CSS**
+- **Netlify** (Deployment)
 
-## To Setup .env File
+---
 
-you must create an .env file in your project folder and save your API key or other sensetive info.
+## Getting Started
 
-Example: REACT_APP_API_KEY=your_firebase_api_key
+### Install Dependencies
 
+Run in the project folder:
+```sh
+npm install
+```
+Installs all required packages listed in `package.json`.
+
+---
+
+### Setup Environment Variables
+
+Create a `.env` file in the root directory and provide your Firebase credentials:
+
+```env
+REACT_APP_API_KEY=your_firebase_api_key
 REACT_APP_AUTH_DOMAIN=your_firebase_auth_domain
-
 REACT_APP_PROJECT_ID=your_firebase_project_id
-
 REACT_APP_STORAGE_BUCKET=your_firebase_storage_bucket
-
 REACT_APP_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
-
 REACT_APP_APP_ID=your_firebase_app_id
+```
+*Never commit your `.env` file!*
 
-(For more info, visit: https://www.npmjs.com/package/firebase )
+---
 
-## To Deploy on Netlify (Frontend-Deployment)
+### Run the Application
 
-Visit: https://app.netlify.com/
+For development:
 
-- Login using GitHub
+```sh
+npm start
+```
+Opens at [http://localhost:3000](http://localhost:3000)
 
-- Click on ‘Import from Git’
+---
 
-- **Connect to Git provider > Github**
+### Build & Deployment
 
-- If the desired repository is not shown, click on ‘Configure the Netlify app on GitHub’
+To build for production:
 
-- Repository Access > All Repository
+```sh
+npm run build
+```
 
-- Select the repository
+To deploy on Netlify:
+- Connect your GitHub repo in Netlify.
+- Set environment variables under **Site settings > Build & deploy > Environment > Environment variables**
+- Deploy!
 
-- Click on ‘Deploy site’
+For more details, see [Netlify Docs](https://docs.netlify.com/configure-builds/environment-variables/).
 
-**Note:** Deploying Process will take 2-5 minutes to be active on Netlify.
+---
 
-**Error:** Check the log if you get an error > apply changes to the codebase > push them on ‘main’ branch.
+## Application Walkthrough
 
-To set Environment Variable:
+1. **Homepage:** Displays a list of blog posts from Firestore, with skeleton loaders for smooth UX.
+2. **Authentication:** Users can log in with Google. Only logged-in users can create posts.
+3. **Create Post:** Authenticated users can add a new blog post, which is immediately stored in Firestore.
+4. **Delete Post:** Authenticated users can delete their own posts.
+5. **Routing:** Uses React Router for navigation and protected routes for authenticated actions.
+6. **UX:** Responsive design, clean UI, and loading skeletons.
 
-- **Site settings > Build & deploy > Environment > Environment variables**
+---
 
-https://docs.netlify.com/configure-builds/environment-variables/
+## Core Components & Key Files
 
-(Make sure to push new changes after setting env to make them effective)
+### Main App Structure
 
-**Note:** You must add the domain name to your Firebase: Authentication > Settings > Authorized domains > Add domain
+```javascript
+// src/App.js
+import { Header, Footer } from './components';
+import { AllRoutes } from './routes/AllRoutes';
+import './App.css';
 
-To change domain name:
+function App() {
+  return (
+    <div className="App">
+      <Header />
+      <AllRoutes />
+      <Footer />
+    </div>
+  );
+}
+export default App;
+```
 
-- Change domain name on Netlify through ‘Site Settings’
+---
 
-404 Page Not Found Error:
+### Firebase Configuration
 
-- https://stackoverflow.com/questions/58065603/netlify-renders-404-on-page-refresh-using-react-and-react-router
+```javascript
+// src/firebase/config.js
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
-- https://www.netlify.com/blog/2019/01/16/redirect-rules-for-all-how-to-configure-redirects-for-your-static-site/
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID
+};
 
-## To Install React-Loading-Skeleton
+const app = initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+export const auth = getAuth(app);
+export const provider = new GoogleAuthProvider();
+```
 
-Open up your terminal from your project folder and run: `npm install react-loading-skeleton`
+---
 
-(For more information, visit: https://github.com/dvtng/react-loading-skeleton )
+### Homepage - Fetching and Displaying Posts
 
-## Available Scripts
+```javascript
+// src/pages/HomePage.js
+import { useEffect, useState, useRef } from "react";
+import { useTitle } from "../hooks/useTitle";
+import { getDocs, collection } from "firebase/firestore";
+import { db } from "../firebase/config";
+import { PostCard, SkeletonCard } from "../components";
 
-In the project directory, you can run:
+export const HomePage = () => {
+  const [posts, setPosts] = useState(new Array(2).fill(false));
+  const [toggle, setToggle] = useState(false);
+  useTitle("Home");
+  const postsRef = useRef(collection(db, "posts"));
 
-### `npm start`
+  useEffect(() => {
+    async function getPosts(){
+      const data = await getDocs(postsRef.current);
+      setPosts(data.docs.map((document) => (
+        {...document.data(), id: document.id}
+      )));
+    }
+    getPosts();
+  }, [postsRef, toggle]);
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  return (
+    <section>
+      { posts.map((post, index) => (
+        post ? (
+          <PostCard key={post.id} post={post} toggle={toggle} setToggle={setToggle} />
+        ) : (
+          <SkeletonCard key={index} />
+        )        
+      )) }      
+    </section>
+  )
+}
+```
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## API & Firebase Usage
 
-### `npm test`
+- **Firestore:** Stores blog posts in a `posts` collection.
+- **Firebase Auth:** Handles Google authentication for users.
+- **Environment Variables:** Used for Firebase config (see `.env.example`).
+- **No backend server:** All data managed via Firebase services.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Routing & Protected Routes
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **AllRoutes.js:** Sets up main routes using React Router.
+- **ProtectedRoutes.js:** Ensures only authenticated users can access certain routes (like creating posts).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Examples
 
-### `npm run eject`
+### Example: Creating a Post
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Login with Google.
+2. Navigate to `/create`.
+3. Fill in the title and description.
+4. Submit to save the post in Firestore.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Example: Deleting a Post
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Only the author can delete their own post, which removes it from Firestore.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## Deployment Notes
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Netlify:** Connect repo, set env variables, deploy.
+- **Domain:** Add Netlify domain to Firebase Auth's authorized domains.
+- **404 Handling:** Redirect rules needed for SPA. See [Netlify Docs](https://www.netlify.com/blog/2019/01/16/redirect-rules-for-all-how-to-configure-redirects-for-your-static-site/).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## Learning Purpose
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **Firebase Integration:** Learn to connect React with Firebase Auth & Firestore.
+- **React Hooks:** Use hooks for state, effect, and custom logic.
+- **Modern CSS:** Use TailwindCSS and custom styles for responsive design.
+- **Deployment:** Understand how to deploy modern React apps with environment variables.
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Keywords
 
-### Making a Progressive Web App
+ReactJS, Firebase, Firestore, Authentication, Google Auth, Blog Platform, CRUD, Netlify, TailwindCSS, React Router, Protected Routes, Skeleton Loader, Environment Variables, PWA, Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## Conclusion
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+This project is a hands-on, practical way to learn Firebase and React integration for real-world applications. It covers all modern best practices: authentication, CRUD operations, responsive UI, and serverless deployment. Clone, run, and extend it for your learning or next portfolio project!
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Happy Coding! 🚀
 
-### `npm run build` fails to minify
+Thank you for exploring this project! If you have any questions or want to contribute, feel free to open issues or PRs.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+```
