@@ -82,7 +82,7 @@ export function CreatePost() {
         />
         <button
           type="submit"
-          className="w-fit py-4 px-6 rounded-lg text-lg font-medium bg-green-600 text-white border-0 cursor-pointer hover:bg-green-700 transition-colors"
+          className="w-fit py-2 px-4 rounded-lg text-md font-medium bg-green-600 text-white border-0 cursor-pointer hover:bg-green-700 transition-colors items-right"
         >
           Create post
         </button>

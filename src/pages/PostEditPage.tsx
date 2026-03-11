@@ -137,7 +137,7 @@ export function PostEditPage() {
         <button
           type="submit"
           disabled={saving}
-          className="w-fit py-4 px-6 rounded-lg text-lg font-medium bg-blue-600 text-white border-0 cursor-pointer hover:bg-blue-700 disabled:opacity-50 transition-colors"
+          className="w-fit py-2 px-4 rounded-lg text-md font-medium bg-blue-600 text-white border-0 cursor-pointer hover:bg-blue-700 disabled:opacity-50 transition-colors items-right"
         >
           {saving ? "Saving…" : "Save changes"}
         </button>
