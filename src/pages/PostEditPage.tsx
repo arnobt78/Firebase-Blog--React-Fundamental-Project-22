@@ -11,6 +11,9 @@ import { useToast } from "../contexts/ToastContext";
 import { db, auth } from "../firebase/config";
 import type { Post } from "../types";
 
+const TITLE_MAX = 100;
+const DESCRIPTION_MAX = 600;
+
 export function PostEditPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -120,24 +123,40 @@ export function PostEditPage() {
         <ArrowLeft size={18} /> Back to post
       </Link>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Post title"
-          maxLength={50}
-          required
-          className="w-full text-lg py-3 px-4 rounded-lg border border-stone-200 shadow-sm focus:ring-2 focus:ring-blue-500 outline-none"
-        />
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="Description"
-          maxLength={600}
-          required
-          rows={10}
-          className="w-full text-base py-3 px-4 rounded-lg border border-stone-200 shadow-sm focus:ring-2 focus:ring-blue-500 outline-none resize-y min-h-[200px]"
-        />
+        <div>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Post title"
+            maxLength={TITLE_MAX}
+            required
+            className="w-full text-lg py-3 px-4 rounded-lg border border-stone-200 shadow-sm focus:ring-2 focus:ring-blue-500 outline-none"
+          />
+          <p
+            className="mt-1 text-right text-sm text-stone-500"
+            aria-live="polite"
+          >
+            {title.length}/{TITLE_MAX}
+          </p>
+        </div>
+        <div>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Description"
+            maxLength={DESCRIPTION_MAX}
+            required
+            rows={10}
+            className="w-full text-base py-3 px-4 rounded-lg border border-stone-200 shadow-sm focus:ring-2 focus:ring-blue-500 outline-none resize-y min-h-[200px]"
+          />
+          <p
+            className="mt-1 text-right text-sm text-stone-500"
+            aria-live="polite"
+          >
+            {description.length}/{DESCRIPTION_MAX}
+          </p>
+        </div>
         <button
           type="submit"
           disabled={saving}

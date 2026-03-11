@@ -1,7 +1,9 @@
 /**
  * Create post page (code walkthrough). Protected route.
  * Form submits to Firestore via addDoc (POST). Author and createdAt come from auth.currentUser and serverTimestamp().
+ * Title and description are controlled inputs so character counts update instantly (learning: useState + onChange).
  */
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PenLine, Lightbulb } from "lucide-react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
@@ -9,26 +11,26 @@ import { useTitle } from "../hooks/useTitle";
 import { useToast } from "../contexts/ToastContext";
 import { db, auth } from "../firebase/config";
 
+const TITLE_MAX = 100;
+const DESCRIPTION_MAX = 600;
+
 export function CreatePost() {
   const navigate = useNavigate();
   const { showToast } = useToast();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   useTitle("Create Post");
   const postRef = collection(db, "posts");
 
   /** Firestore addDoc: creates a new document in "posts" with auto-generated id; serverTimestamp() sets server-side created time */
   async function handleCreatePost(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const form = event.currentTarget;
-    const title = (form.elements.namedItem("title") as HTMLInputElement).value;
-    const description = (
-      form.elements.namedItem("description") as HTMLTextAreaElement
-    ).value;
     const user = auth.currentUser;
     if (!user) return;
 
     const document = {
-      title,
-      description,
+      title: title.trim(),
+      description: description.trim(),
       author: {
         name: user.displayName ?? "Anonymous",
         id: user.uid,
@@ -68,22 +70,42 @@ export function CreatePost() {
       </div>
 
       <form className="flex flex-col gap-4" onSubmit={handleCreatePost}>
-        <input
-          type="text"
-          name="title"
-          placeholder="Post title"
-          maxLength={50}
-          required
-          className="w-full text-lg py-3 px-4 rounded-lg border border-stone-200 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow"
-        />
-        <textarea
-          name="description"
-          placeholder="Write your post content here..."
-          maxLength={600}
-          required
-          rows={10}
-          className="w-full text-base py-3 px-4 rounded-lg border border-stone-200 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none resize-y min-h-[200px] transition-shadow"
-        />
+        <div>
+          <input
+            type="text"
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Write your post title here..."
+            maxLength={TITLE_MAX}
+            required
+            className="w-full text-md py-3 px-4 rounded-lg border border-stone-200 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow"
+          />
+          <p
+            className="mt-1 text-right text-sm text-stone-500"
+            aria-live="polite"
+          >
+            {title.length}/{TITLE_MAX}
+          </p>
+        </div>
+        <div>
+          <textarea
+            name="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Write your post description here..."
+            maxLength={DESCRIPTION_MAX}
+            required
+            rows={10}
+            className="w-full text-md py-3 px-4 rounded-lg border border-stone-200 shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none resize-y min-h-[200px] transition-shadow"
+          />
+          <p
+            className="mt-1 text-right text-sm text-stone-500"
+            aria-live="polite"
+          >
+            {description.length}/{DESCRIPTION_MAX}
+          </p>
+        </div>
         <button
           type="submit"
           className="w-fit py-2 px-4 rounded-lg text-md font-medium bg-green-600 text-white border-0 cursor-pointer hover:bg-green-700 transition-colors items-right justify-end"
