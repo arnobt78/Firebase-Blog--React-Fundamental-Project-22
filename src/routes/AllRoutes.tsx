@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { HomePage, CreatePost, PageNotFound } from '../pages';
+import { HomePage, CreatePost, PageNotFound, PostDetailPage, PostEditPage } from '../pages';
 import { ProtectedRoutes } from './ProtectedRoutes';
 
 export function AllRoutes() {
@@ -8,6 +8,8 @@ export function AllRoutes() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="create" element={<ProtectedRoutes><CreatePost /></ProtectedRoutes>} />
+        <Route path="post/:id" element={<PostDetailPage />} />
+        <Route path="post/:id/edit" element={<ProtectedRoutes><PostEditPage /></ProtectedRoutes>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </main>

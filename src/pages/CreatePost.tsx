@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { PenLine, Lightbulb } from "lucide-react";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useTitle } from "../hooks/useTitle";
 import { db, auth } from "../firebase/config";
 
@@ -25,7 +25,9 @@ export function CreatePost() {
       author: {
         name: user.displayName ?? "Anonymous",
         id: user.uid,
+        photoURL: user.photoURL ?? null,
       },
+      createdAt: serverTimestamp(),
     };
     await addDoc(postRef, document);
     navigate("/");

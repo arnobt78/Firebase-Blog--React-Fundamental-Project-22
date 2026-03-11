@@ -37,13 +37,10 @@ export function HomePage() {
       <div className="mb-8 p-5 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100">
         <div className="flex items-center gap-2 text-blue-800 font-semibold text-lg mb-2">
           <BookOpen size={22} aria-hidden />
-          Learn React & Firebase
+          Learn React & Firebase (GET, POST, PUT, DELETE)
         </div>
         <p className="text-stone-600 text-sm leading-relaxed">
-          This is the home page. Posts are loaded from Firestore. You can create
-          a post after logging in with Google. Each card shows title,
-          description, and author. Try adding your first post from the Create
-          page.
+          This is the home page. Posts are loaded from Firestore (GET). Create a post (POST), open a post to view details, edit yours (PUT), or delete (DELETE). Log in with Google or Test User, then use Create. Each card shows author avatar, date, and links to detail and edit.
         </p>
       </div>
 
@@ -61,16 +58,16 @@ export function HomePage() {
             <Inbox size={40} className="text-stone-500" aria-hidden />
           </div>
           <h2 className="text-xl font-semibold text-stone-800 mb-2">
-            No posts yet
+            No posts yet — feed is empty
           </h2>
-          <p className="text-stone-600 max-w-7xl mb-6">
-            The feed is empty. Log in and create your first post to see it here.
-            This empty state helps beginners learn conditional rendering in
-            React.
+          <p className="text-stone-600 max-w-md mb-2">
+            There are no blog posts to show. Add your first post to get started.
+          </p>
+          <p className="text-stone-500 text-sm mb-6">
+            Log in with Google or Test User above, then click Create to add a post. This empty state is a good example of conditional rendering in React.
           </p>
           <p className="text-sm text-stone-500">
-            Click &quot;Login&quot; in the navbar, then &quot;Create&quot; to
-            add a post.
+            Click &quot;Google&quot; or &quot;Test User&quot; in the navbar, then &quot;Create&quot; to add a post.
           </p>
         </div>
       )}
