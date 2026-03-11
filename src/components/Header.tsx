@@ -13,6 +13,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
+import { TEST_USER_EMAIL } from "../contexts/AuthContext";
 import { auth } from "../firebase/config";
 import { Avatar } from "./Avatar";
 
@@ -44,10 +45,13 @@ export function Header() {
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
-  // Firebase Auth current user (only set after login); used for profile dropdown
+  // Firebase Auth current user (only set after login); used for profile dropdown. Test user shown as "Guest User".
   const currentUser = auth.currentUser;
-  const displayName = currentUser?.displayName ?? "User";
   const email = currentUser?.email ?? "";
+  const displayName =
+    email === TEST_USER_EMAIL
+      ? "Guest User"
+      : (currentUser?.displayName ?? "User");
   const photoURL = currentUser?.photoURL ?? null;
   const uid = currentUser?.uid ?? "";
 

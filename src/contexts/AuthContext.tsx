@@ -57,8 +57,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return signInWithPopup(auth, provider).then(() => {
       setIsAuth(true);
       localStorage.setItem(AUTH_KEY, 'true');
-    }).catch((err: Error) => {
-      setAuthError(err.message ?? 'Google sign-in failed');
+    }).catch((err: Error & { code?: string }) => {
+      const msg = err.message ?? 'Google sign-in failed';
+      if (err.code === 'auth/unauthorized-domain' || msg.includes('authorized') || msg.includes('OAuth')) {
+        setAuthError('Add this site to Firebase: Console → Authentication → Settings → Authorized domains (e.g. firebase-blog-writing.vercel.app)');
+      } else {
+        setAuthError(msg);
+      }
     });
   }, []);
 
