@@ -8,7 +8,7 @@ import { ProtectedRoutes } from './ProtectedRoutes';
 
 export function AllRoutes() {
   return (
-    <main className="flex-1 min-h-0 px-2 py-4">
+    <main className="flex-1 min-h-0 px-2 py-4 w-full max-w-7xl mx-auto">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="create" element={<ProtectedRoutes><CreatePost /></ProtectedRoutes>} />

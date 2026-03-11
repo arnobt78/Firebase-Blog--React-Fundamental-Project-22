@@ -68,7 +68,7 @@ export function PostEditPage() {
 
   if (!post) {
     return (
-      <section className="flex-1 px-4 py-8 text-center">
+      <section className="flex-1 px-4 py-8 text-center max-w-7xl mx-auto">
         <p className="text-stone-600 mb-4">Post not found.</p>
         <Link
           to="/"
@@ -82,7 +82,7 @@ export function PostEditPage() {
 
   if (!canEdit) {
     return (
-      <section className="flex-1 px-4 py-8 text-center">
+      <section className="flex-1 px-4 py-8 text-center max-w-7xl mx-auto">
         <p className="text-stone-600 mb-4">You can only edit your own posts.</p>
         <Link
           to={`/post/${id}`}

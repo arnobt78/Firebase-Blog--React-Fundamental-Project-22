@@ -38,7 +38,7 @@ export function HomePage() {
     !isLoading && posts.length > 0 && posts.some((p) => p !== false);
 
   return (
-    <section className="flex-1 px-4 py-6">
+    <section className="flex-1 px-4 py-6 max-w-7xl mx-auto w-full">
       <div className="mb-8 p-5 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100">
         <div className="flex items-center gap-2 text-blue-800 font-semibold text-lg mb-2">
           <BookOpen size={22} aria-hidden />

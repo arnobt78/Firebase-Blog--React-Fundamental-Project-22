@@ -38,7 +38,7 @@ export function PostDetailPage() {
 
   if (loading) {
     return (
-      <section className="flex-1 px-4 py-8 max-w-3xl mx-auto">
+      <section className="flex-1 px-4 py-8 max-w-7xl mx-auto">
         <div className="h-6 w-32 bg-stone-200 rounded animate-pulse mb-6" />
         <div className="rounded-xl border border-stone-200 bg-white p-6 shadow-sm">
           <div className="h-8 w-3/4 bg-stone-200 rounded animate-pulse mb-4" />
@@ -61,7 +61,7 @@ export function PostDetailPage() {
 
   if (!post) {
     return (
-      <section className="flex-1 px-4 py-8 text-center">
+      <section className="flex-1 px-4 py-8 text-center max-w-7xl mx-auto">
         <p className="text-stone-600 mb-4">Post not found.</p>
         <Link
           to="/"
