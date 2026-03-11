@@ -37,7 +37,11 @@ export function CreatePost() {
       createdAt: serverTimestamp(),
     };
     await addDoc(postRef, document);
-    showToast({ type: "success", title: "Post created successfully" });
+    showToast({
+      type: "success",
+      title: "Post created",
+      message: "Your new post is live.",
+    });
     navigate("/");
   }
 
@@ -82,7 +86,7 @@ export function CreatePost() {
         />
         <button
           type="submit"
-          className="w-fit py-2 px-4 rounded-lg text-md font-medium bg-green-600 text-white border-0 cursor-pointer hover:bg-green-700 transition-colors items-right"
+          className="w-fit py-2 px-4 rounded-lg text-md font-medium bg-green-600 text-white border-0 cursor-pointer hover:bg-green-700 transition-colors items-right justify-end"
         >
           Create post
         </button>

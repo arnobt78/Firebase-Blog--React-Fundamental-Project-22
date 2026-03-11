@@ -1,7 +1,8 @@
 /**
  * PostCard: one blog post in the list (code walkthrough).
- * Shows title (link to detail), description, author avatar+name, date, and for author only: edit link + delete. toggle/setToggle refresh the list after delete.
+ * Shows title (link to detail), description, author avatar+name, date, and for author only: edit link + delete. Delete opens a confirmation modal.
  */
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { doc, deleteDoc } from "firebase/firestore";
 import { Trash2, Pencil, ExternalLink } from "lucide-react";
@@ -9,6 +10,7 @@ import { auth, db } from "../firebase/config";
 import { useAuth } from "../contexts/AuthContext";
 import { useToast } from "../contexts/ToastContext";
 import { Avatar } from "./Avatar";
+import { ConfirmModal } from "./ConfirmModal";
 import { formatPostDate } from "../lib/formatDate";
 import type { Post } from "../types";
 
@@ -22,6 +24,7 @@ export function PostCard({ post, toggle, setToggle }: PostCardProps) {
   const { id, title, description, author, createdAt } = post;
   const { isAuth } = useAuth();
   const { showToast } = useToast();
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const canDelete = isAuth && auth.currentUser && author.id === auth.currentUser.uid;
   const canEdit = canDelete;
   const dateStr = formatPostDate(createdAt);
@@ -30,7 +33,11 @@ export function PostCard({ post, toggle, setToggle }: PostCardProps) {
   async function handleDelete() {
     const docRef = doc(db, "posts", id);
     await deleteDoc(docRef);
-    showToast({ type: "success", title: "Post deleted successfully" });
+    showToast({
+      type: "success",
+      title: "Post deleted",
+      message: "The post has been removed.",
+    });
     setToggle(!toggle);
   }
 
@@ -71,8 +78,8 @@ export function PostCard({ post, toggle, setToggle }: PostCardProps) {
             <span
               role="button"
               tabIndex={0}
-              onClick={handleDelete}
-              onKeyDown={(e) => e.key === "Enter" && handleDelete()}
+              onClick={() => setConfirmDeleteOpen(true)}
+              onKeyDown={(e) => e.key === "Enter" && setConfirmDeleteOpen(true)}
               className="inline-flex items-center gap-1 text-red-600 cursor-pointer p-1 rounded hover:bg-red-50 transition-colors"
               aria-label="Delete post"
             >
@@ -81,6 +88,16 @@ export function PostCard({ post, toggle, setToggle }: PostCardProps) {
           )}
         </div>
       </div>
+      <ConfirmModal
+        open={confirmDeleteOpen}
+        onClose={() => setConfirmDeleteOpen(false)}
+        onConfirm={handleDelete}
+        title="Delete this post?"
+        description="This action cannot be undone. The post will be permanently removed."
+        confirmLabel="Delete"
+        cancelLabel="Cancel"
+        variant="danger"
+      />
     </article>
   );
 }

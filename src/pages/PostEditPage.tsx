@@ -54,7 +54,11 @@ export function PostEditPage() {
     try {
       const docRef = doc(db, "posts", id);
       await updateDoc(docRef, { title, description });
-      showToast({ type: "success", title: "Post updated successfully" });
+      showToast({
+        type: "success",
+        title: "Post updated",
+        message: "Your changes have been saved.",
+      });
       navigate(`/post/${id}`);
     } finally {
       setSaving(false);
@@ -137,7 +141,7 @@ export function PostEditPage() {
         <button
           type="submit"
           disabled={saving}
-          className="w-fit py-2 px-4 rounded-lg text-md font-medium bg-blue-600 text-white border-0 cursor-pointer hover:bg-blue-700 disabled:opacity-50 transition-colors items-right"
+          className="w-fit py-2 px-4 rounded-lg text-md font-medium bg-blue-600 text-white border-0 cursor-pointer hover:bg-blue-700 disabled:opacity-50 transition-colors items-right justify-end"
         >
           {saving ? "Saving…" : "Save changes"}
         </button>

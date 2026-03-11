@@ -66,8 +66,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const name = auth.currentUser?.displayName ?? auth.currentUser?.email ?? 'there';
         showToast({
           type: 'success',
-          title: `Hello ${name} 👋`,
-          message: 'Enjoy blog writing!',
+          title: `Hello, ${name} 👋`,
+          message: 'Welcome back. Enjoy blog writing!',
           icon: 'hand',
         });
       })
@@ -92,8 +92,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem(AUTH_KEY, 'true');
         showToast({
           type: 'success',
-          title: 'Hello Guest User 👋',
-          message: 'Enjoy blog writing!',
+          title: 'Hello, Guest User 👋',
+          message: 'Welcome back. Enjoy blog writing!',
           icon: 'hand',
         });
       })
@@ -117,7 +117,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setAuthError(null);
     showToast({
       type: 'success',
-      title: `Goodbye ${name} 👋`,
+      title: `Goodbye, ${name} 👋`,
       message: 'See you again soon!',
       icon: 'logout',
     });

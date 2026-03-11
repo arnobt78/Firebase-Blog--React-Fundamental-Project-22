@@ -58,7 +58,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
       {children}
       {toast && (
         <div
-          className="fixed bottom-6 right-6 z-50 max-w-sm"
+          className="fixed bottom-6 right-6 z-50 w-full max-w-[420px] min-w-[320px] px-4 sm:px-0"
           role="status"
           aria-live="polite"
         >
@@ -76,14 +76,14 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
                 }
                 aria-hidden
               >
-                <IconComponent size={22} />
+                <IconComponent size={24} />
               </span>
               <div className="min-w-0 flex-1">
                 <p
                   className={
                     isError
-                      ? "font-semibold text-red-800"
-                      : "font-semibold text-stone-900"
+                      ? "font-medium text-base text-red-800"
+                      : "font-medium text-base text-stone-900"
                   }
                 >
                   {toast.title}
@@ -92,8 +92,8 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
                   <p
                     className={
                       isError
-                        ? "mt-0.5 text-sm text-red-700"
-                        : "mt-0.5 text-sm text-stone-600"
+                        ? "mt-1 text-base text-red-700"
+                        : "mt-1 text-base text-stone-600"
                     }
                   >
                     {toast.message}

@@ -19,22 +19,25 @@
     "react-router-dom": "^6.28.0"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.0.0",
     "@eslint/js": "^9.15.0",
+    "@tailwindcss/vite": "^4.0.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.15.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
+    "firebase-admin": "^13.7.0",
     "globals": "^15.12.0",
-    "typescript": "~5.6.3",
     "tailwindcss": "^4.0.0",
+    "typescript": "~5.6.3",
     "typescript-eslint": "^8.15.0",
-    "vite": "^6.0.3",
-    "firebase-admin": "^13.0.2"
+    "vite": "^6.0.3"
   },
   "description": "Firebase Write Node Blog – React, Vite, TypeScript & Firebase tutorial project",
   "author": "Arnob Mahmud (https://www.arnobmahmud.com, contact@arnobmahmud.com)",
-  "license": "ISC"
+  "license": "ISC",
+  "overrides": {
+    "@tootallnate/once": ">=3.0.1"
+  }
 }
