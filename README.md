@@ -1,14 +1,6 @@
-# Blog Writing Firebase - React
+# Blog Writing - React, Vite, TypeScript, Firebase, TailwindCSS Fundamental Project 22
 
-![Screenshot 2024-09-03 at 23 22 58](https://github.com/user-attachments/assets/59add876-b826-4fba-9793-d6bf6b1dfd52) ![Screenshot 2024-09-03 at 23 23 38](https://github.com/user-attachments/assets/53dcf74f-9308-4bf4-a2c0-6e340441c870) ![Screenshot 2024-09-03 at 23 24 01](https://github.com/user-attachments/assets/51013f88-5c43-4d7a-b889-acf62cc8aafe)
-
----
-
-## Project Summary
-
-BlogWriting-Firebase-ReactWebpage is a modern web application for writing, publishing, and managing blog posts, built using ReactJS and Firebase (Firestore, Authentication). It demonstrates a full-stack workflow of a blog platform with Google Authentication, serverless backend, and dynamic UI using React, TailwindCSS, and React Loading Skeletons. The app is a great learning resource for Firebase integration, protected routes, CRUD operations, and deploying on Netlify.
-
-- **Live-demo:** [https://blogwriting-arnob.netlify.app](https://blogwriting-arnob.netlify.app)
+- **Live Demo:** []()
 
 ---
 
@@ -80,7 +72,8 @@ BlogWriting-Firebase--ReactJS/
 ├── package.json
 └── README.md
 ```
-*Note: Only top-level and key files listed. More files may exist. [View all files on GitHub ›](https://github.com/arnobt78/BlogWriting-Firebase--ReactJS)*
+
+_Note: Only top-level and key files listed. More files may exist. [View all files on GitHub ›](https://github.com/arnobt78/BlogWriting-Firebase--ReactJS)_
 
 ---
 
@@ -102,9 +95,11 @@ BlogWriting-Firebase--ReactJS/
 ### Install Dependencies
 
 Run in the project folder:
+
 ```sh
 npm install
 ```
+
 Installs all required packages listed in `package.json`.
 
 ---
@@ -121,7 +116,8 @@ REACT_APP_STORAGE_BUCKET=your_firebase_storage_bucket
 REACT_APP_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
 REACT_APP_APP_ID=your_firebase_app_id
 ```
-*Never commit your `.env` file!*
+
+_Never commit your `.env` file!_
 
 ---
 
@@ -132,6 +128,7 @@ For development:
 ```sh
 npm start
 ```
+
 Opens at [http://localhost:3000](http://localhost:3000)
 
 ---
@@ -145,6 +142,7 @@ npm run build
 ```
 
 To deploy on Netlify:
+
 - Connect your GitHub repo in Netlify.
 - Set environment variables under **Site settings > Build & deploy > Environment > Environment variables**
 - Deploy!
@@ -170,9 +168,9 @@ For more details, see [Netlify Docs](https://docs.netlify.com/configure-builds/e
 
 ```javascript
 // src/App.js
-import { Header, Footer } from './components';
-import { AllRoutes } from './routes/AllRoutes';
-import './App.css';
+import { Header, Footer } from "./components";
+import { AllRoutes } from "./routes/AllRoutes";
+import "./App.css";
 
 function App() {
   return (
@@ -202,7 +200,7 @@ const firebaseConfig = {
   projectId: process.env.REACT_APP_PROJECT_ID,
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
@@ -230,28 +228,34 @@ export const HomePage = () => {
   const postsRef = useRef(collection(db, "posts"));
 
   useEffect(() => {
-    async function getPosts(){
+    async function getPosts() {
       const data = await getDocs(postsRef.current);
-      setPosts(data.docs.map((document) => (
-        {...document.data(), id: document.id}
-      )));
+      setPosts(
+        data.docs.map((document) => ({ ...document.data(), id: document.id })),
+      );
     }
     getPosts();
   }, [postsRef, toggle]);
 
   return (
     <section>
-      { posts.map((post, index) => (
+      {posts.map((post, index) =>
         post ? (
-          <PostCard key={post.id} post={post} toggle={toggle} setToggle={setToggle} />
+          <PostCard
+            key={post.id}
+            post={post}
+            toggle={toggle}
+            setToggle={setToggle}
+          />
         ) : (
           <SkeletonCard key={index} />
-        )        
-      )) }      
+        ),
+      )}
     </section>
-  )
-}
+  );
+};
 ```
+
 ---
 
 ## API & Firebase Usage
@@ -312,6 +316,15 @@ ReactJS, Firebase, Firestore, Authentication, Google Auth, Blog Platform, CRUD, 
 
 This project is a hands-on, practical way to learn Firebase and React integration for real-world applications. It covers all modern best practices: authentication, CRUD operations, responsive UI, and serverless deployment. Clone, run, and extend it for your learning or next portfolio project!
 
+---
+
+## Happy Coding! 🚀
+
+Thank you for exploring this project! If you have any questions or want to contribute, feel free to open issues or PRs.
+
+---
+
+```
 ---
 
 ## Happy Coding! 🚀

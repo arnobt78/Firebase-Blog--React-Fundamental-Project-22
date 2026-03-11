@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+  html {
+    @apply antialiased;
+  }
+  body {
+    @apply m-0 min-h-screen bg-stone-50 text-stone-900 font-sans;
+  }
+  a {
+    @apply text-stone-900 no-underline;
+  }
+}
