@@ -1,3 +1,7 @@
+/**
+ * Header: navbar with logo, nav links (Home, Create), and auth UI (code walkthrough).
+ * When logged in: profile avatar + dropdown (name, email, Home, Create post, Logout). When logged out: Google + Test User buttons. Click-outside closes dropdown.
+ */
 import { useState, useRef, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Home, PenSquare, LogOut, LogIn, User, ChevronDown } from "lucide-react";
@@ -12,6 +16,7 @@ export function Header() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Close dropdown when clicking outside of it
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
@@ -22,6 +27,7 @@ export function Header() {
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
+  // Firebase Auth current user (only set after login); used for profile dropdown
   const currentUser = auth.currentUser;
   const displayName = currentUser?.displayName ?? "User";
   const email = currentUser?.email ?? "";
@@ -31,10 +37,10 @@ export function Header() {
   return (
     <header className="min-h-[70px] h-[70px] px-4 py-2.5 border-b border-stone-200 flex justify-between items-center bg-white shrink-0">
       <Link to="/" className="flex items-center gap-2.5 min-w-0">
-        <span className="shrink-0 w-10 h-10 inline-flex items-center justify-center" aria-hidden>
-          <img src="/vite.svg" alt="" width={LOGO_SIZE} height={LOGO_SIZE} decoding="async" className="w-10 h-10 object-contain block" />
+        <span className="shrink-0 w-10 h-10 min-w-10 min-h-10 inline-flex items-center justify-center bg-stone-100 rounded-lg overflow-hidden" aria-hidden>
+          <img src="/vite.svg" alt="" width={LOGO_SIZE} height={LOGO_SIZE} decoding="async" loading="eager" className="w-full h-full object-contain" />
         </span>
-        <span className="text-lg font-semibold whitespace-nowrap overflow-hidden text-ellipsis hidden sm:inline">
+        <span className="text-lg font-semibold whitespace-nowrap overflow-hidden text-ellipsis hidden sm:inline min-w-0">
           Firebase Write Node Blog
         </span>
       </Link>

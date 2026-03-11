@@ -1,3 +1,7 @@
+/**
+ * Formats post createdAt for display (code walkthrough).
+ * Handles Firestore Timestamp ({ seconds }) and ISO date strings; returns locale date string or ''.
+ */
 export function formatPostDate(createdAt: { seconds: number } | string | null | undefined): string {
   if (!createdAt) return '';
   if (typeof createdAt === 'string') {

@@ -1,4 +1,8 @@
-/** Firebase app, Firestore, and Auth (Google) configuration. Env vars must be prefixed with VITE_ in Vite. */
+/**
+ * Firebase configuration (code walkthrough).
+ * Vite only exposes env vars that start with VITE_ to the client; use VITE_* in .env.
+ * db = Firestore (posts collection), auth = Auth (login/logout), provider = Google sign-in.
+ */
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';

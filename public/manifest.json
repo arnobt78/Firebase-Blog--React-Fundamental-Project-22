@@ -1,6 +1,7 @@
 {
   "short_name": "Firebase Blog",
-  "name": "Firebase Write Node Blog",
+  "name": "Firebase Write Node Blog – React, Vite, TypeScript & Firebase Tutorial",
+  "description": "Beginner-friendly blog app with React, Vite, TypeScript, Firebase Firestore and Auth, TailwindCSS. By Arnob Mahmud.",
   "icons": [
     {
       "src": "/vite.svg",

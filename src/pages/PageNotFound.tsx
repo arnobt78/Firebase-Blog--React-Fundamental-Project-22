@@ -1,3 +1,4 @@
+/** 404 page (code walkthrough). Rendered for any path that doesn't match other routes (catch-all *). */
 import { Link } from "react-router-dom";
 import { Home, FileQuestion } from "lucide-react";
 import { useTitle } from "../hooks/useTitle";

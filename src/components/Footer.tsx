@@ -1,3 +1,4 @@
+/** Footer: site name link and copyright (code walkthrough). Reusable; update link/text as needed. */
 import { Link } from "react-router-dom";
 import { Copyright } from "lucide-react";
 

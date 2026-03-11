@@ -1,3 +1,8 @@
+/**
+ * Auth context (code walkthrough).
+ * Provides isAuth, login (Google), loginWithTestUser (email/password), logout, and authError to the whole app.
+ * onAuthStateChanged keeps isAuth in sync with Firebase; localStorage is used for persistence across refresh.
+ */
 import { createContext, useCallback, useContext, useState, useEffect } from 'react';
 import { signInWithPopup, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth, provider } from '../firebase/config';
@@ -7,6 +12,7 @@ const AUTH_KEY = 'isAuth';
 export const TEST_USER_EMAIL = 'test@user.com';
 export const TEST_USER_PASSWORD = '12345678';
 
+/** Read auth state from localStorage (used for initial state before Firebase resolves) */
 function getStoredAuth(): boolean {
   try {
     const raw = localStorage.getItem(AUTH_KEY);
@@ -32,6 +38,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAuth, setIsAuth] = useState(getStoredAuth);
   const [authError, setAuthError] = useState<string | null>(null);
 
+  // Sync React state with Firebase auth; unsub on unmount to avoid leaks
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       setIsAuth(!!user);

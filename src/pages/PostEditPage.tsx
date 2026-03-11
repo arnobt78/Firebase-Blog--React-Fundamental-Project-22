@@ -1,3 +1,7 @@
+/**
+ * Post edit page (code walkthrough). Protected route, dynamic /post/:id/edit.
+ * Loads post with getDoc, updates with updateDoc (PUT). Only the post author can edit; others see "You can only edit your own posts".
+ */
 import { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
@@ -16,6 +20,7 @@ export function PostEditPage() {
   const [description, setDescription] = useState("");
   useTitle("Edit Post");
 
+  // Load existing post for editing
   useEffect(() => {
     if (!id) {
       setLoading(false);
@@ -36,8 +41,10 @@ export function PostEditPage() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  const canEdit = post && auth.currentUser && post.author.id === auth.currentUser.uid;
+  const canEdit =
+    post && auth.currentUser && post.author.id === auth.currentUser.uid;
 
+  /** Firestore updateDoc: updates only the given fields (title, description) on the existing document */
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!id || !canEdit) return;
@@ -53,7 +60,7 @@ export function PostEditPage() {
 
   if (loading) {
     return (
-      <section className="flex-1 px-4 py-8 max-w-2xl mx-auto">
+      <section className="flex-1 px-4 py-8 max-w-7xl mx-auto">
         <div className="h-8 w-48 bg-stone-200 rounded animate-pulse" />
       </section>
     );
@@ -63,7 +70,10 @@ export function PostEditPage() {
     return (
       <section className="flex-1 px-4 py-8 text-center">
         <p className="text-stone-600 mb-4">Post not found.</p>
-        <Link to="/" className="text-blue-600 hover:underline inline-flex items-center gap-1">
+        <Link
+          to="/"
+          className="text-blue-600 hover:underline inline-flex items-center gap-1"
+        >
           <ArrowLeft size={18} /> Back to Home
         </Link>
       </section>
@@ -74,7 +84,10 @@ export function PostEditPage() {
     return (
       <section className="flex-1 px-4 py-8 text-center">
         <p className="text-stone-600 mb-4">You can only edit your own posts.</p>
-        <Link to={`/post/${id}`} className="text-blue-600 hover:underline inline-flex items-center gap-1">
+        <Link
+          to={`/post/${id}`}
+          className="text-blue-600 hover:underline inline-flex items-center gap-1"
+        >
           <ArrowLeft size={18} /> View post
         </Link>
       </section>
@@ -82,16 +95,21 @@ export function PostEditPage() {
   }
 
   return (
-    <section className="flex-1 px-4 py-6 max-w-2xl mx-auto">
+    <section className="flex-1 px-4 py-6 max-w-7xl mx-auto">
       <div className="mb-6 p-4 rounded-xl bg-amber-50 border border-amber-200">
         <div className="flex items-center gap-2 text-amber-800 font-semibold text-sm mb-1">
           <Lightbulb size={18} aria-hidden /> PUT / Update
         </div>
         <p className="text-stone-600 text-sm">
-          Editing uses Firestore <code className="bg-amber-100 px-1 rounded">updateDoc</code> to update only the title and description fields.
+          Editing uses Firestore{" "}
+          <code className="bg-amber-100 px-1 rounded">updateDoc</code> to update
+          only the title and description fields.
         </p>
       </div>
-      <Link to={`/post/${id}`} className="inline-flex items-center gap-1 text-stone-600 hover:text-blue-600 mb-6">
+      <Link
+        to={`/post/${id}`}
+        className="inline-flex items-center gap-1 text-stone-600 hover:text-blue-600 mb-6"
+      >
         <ArrowLeft size={18} /> Back to post
       </Link>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit}>

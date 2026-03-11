@@ -1,3 +1,7 @@
+/**
+ * Create post page (code walkthrough). Protected route.
+ * Form submits to Firestore via addDoc (POST). Author and createdAt come from auth.currentUser and serverTimestamp().
+ */
 import { useNavigate } from "react-router-dom";
 import { PenLine, Lightbulb } from "lucide-react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
@@ -9,6 +13,7 @@ export function CreatePost() {
   useTitle("Create Post");
   const postRef = collection(db, "posts");
 
+  /** Firestore addDoc: creates a new document in "posts" with auto-generated id; serverTimestamp() sets server-side created time */
   async function handleCreatePost(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;

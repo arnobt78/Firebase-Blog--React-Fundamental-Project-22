@@ -1,3 +1,7 @@
+/**
+ * Route definitions (code walkthrough).
+ * / = home (list posts), /create and /post/:id/edit are protected. post/:id = dynamic detail page.
+ */
 import { Routes, Route } from 'react-router-dom';
 import { HomePage, CreatePost, PageNotFound, PostDetailPage, PostEditPage } from '../pages';
 import { ProtectedRoutes } from './ProtectedRoutes';
