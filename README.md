@@ -1,4 +1,4 @@
-# Blog Writing - React, Vite, TypeScript, Firebase, Context API, TailwindCSS Fundamental Project 22
+# Blog Writing - React, Vite, TypeScript, Firebase (Firestore + Auth), Context API (AuthContext, ToastContext), TailwindCSS Fundamental Project 22
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![React](https://img.shields.io/badge/React-18.3.1-blue)](https://react.dev/)
@@ -12,10 +12,10 @@ A beginner-friendly, educational blog application built with React, Vite, TypeSc
 
 - **Live Demo:** [https://firebase-blog-writing.vercel.app/](https://firebase-blog-writing.vercel.app/)
 
-<img width="1431" height="946" alt="Screenshot 2026-03-11 at 16 27 32" src="https://github.com/user-attachments/assets/c84cedf5-3414-4a77-8a24-e32afa70380a" />
-<img width="1441" height="943" alt="Screenshot 2026-03-11 at 16 27 46" src="https://github.com/user-attachments/assets/2f622d5e-032d-4581-8657-8bf0528110b2" />
-<img width="1461" height="779" alt="Screenshot 2026-03-11 at 16 27 57" src="https://github.com/user-attachments/assets/31795e03-8f99-42ab-9f96-b2e039f50a96" />
-<img width="1464" height="865" alt="Screenshot 2026-03-11 at 16 28 09" src="https://github.com/user-attachments/assets/e53222f5-0049-4536-bd1a-c648d2f44f37" />
+![Screenshot 2026-03-11 at 16 27 32](https://github.com/user-attachments/assets/c84cedf5-3414-4a77-8a24-e32afa70380a)
+![Screenshot 2026-03-11 at 16 27 46](https://github.com/user-attachments/assets/2f622d5e-032d-4581-8657-8bf0528110b2)
+![Screenshot 2026-03-11 at 16 27 57](https://github.com/user-attachments/assets/31795e03-8f99-42ab-9f96-b2e039f50a96)
+![Screenshot 2026-03-11 at 16 28 09](https://github.com/user-attachments/assets/e53222f5-0049-4536-bd1a-c648d2f44f37)
 
 ## Table of Contents
 
