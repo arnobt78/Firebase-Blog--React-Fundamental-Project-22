@@ -201,6 +201,15 @@ VITE_APP_ID=your_app_id
 
 Copy from `.env.example` and replace the placeholder values. **Do not commit `.env`** (it is in `.gitignore`). On Vercel/Netlify, add the same variable names in the dashboard under Environment Variables.
 
+**Firebase Console – required for login:**
+
+1. **Authorized domains** (needed for Google and Test User on your deployed URL):  
+   Firebase Console → **Authentication** → **Settings** → **Authorized domains** → **Add domain** → add e.g. `firebase-blog-writing.vercel.app` and `localhost` for local dev.
+2. **Email/Password** (needed for Test User):  
+   **Authentication** → **Sign-in method** → enable **Email/Password**.
+3. **Create the demo user** (so “Test User” button works):  
+   From project root run: `npm run create-test-user` (see `script/README.md`; requires a service account key from Project settings → Service accounts → Generate new private key, saved as `script/serviceAccountKey.json`).
+
 ---
 
 ## How to Run & Use

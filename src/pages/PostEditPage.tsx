@@ -7,12 +7,14 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { ArrowLeft, Lightbulb } from "lucide-react";
 import { useTitle } from "../hooks/useTitle";
+import { useToast } from "../contexts/ToastContext";
 import { db, auth } from "../firebase/config";
 import type { Post } from "../types";
 
 export function PostEditPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { showToast } = useToast();
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -52,6 +54,7 @@ export function PostEditPage() {
     try {
       const docRef = doc(db, "posts", id);
       await updateDoc(docRef, { title, description });
+      showToast({ type: "success", title: "Post updated successfully" });
       navigate(`/post/${id}`);
     } finally {
       setSaving(false);
@@ -134,7 +137,7 @@ export function PostEditPage() {
         <button
           type="submit"
           disabled={saving}
-          className="w-full py-4 px-6 rounded-lg text-lg font-medium bg-blue-600 text-white border-0 cursor-pointer hover:bg-blue-700 disabled:opacity-50 transition-colors"
+          className="w-fit py-4 px-6 rounded-lg text-lg font-medium bg-blue-600 text-white border-0 cursor-pointer hover:bg-blue-700 disabled:opacity-50 transition-colors"
         >
           {saving ? "Saving…" : "Save changes"}
         </button>

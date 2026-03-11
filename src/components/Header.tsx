@@ -142,16 +142,18 @@ export function Header() {
                   >
                     Create post
                   </Link>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setDropdownOpen(false);
-                      logout();
-                    }}
-                    className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50"
-                  >
-                    <LogOut size={16} aria-hidden /> Logout
-                  </button>
+                  <div className="border-t border-stone-200 mt-1 pt-1">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setDropdownOpen(false);
+                        logout();
+                      }}
+                      className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                    >
+                      <LogOut size={16} aria-hidden /> Logout
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

@@ -6,10 +6,12 @@ import { useNavigate } from "react-router-dom";
 import { PenLine, Lightbulb } from "lucide-react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useTitle } from "../hooks/useTitle";
+import { useToast } from "../contexts/ToastContext";
 import { db, auth } from "../firebase/config";
 
 export function CreatePost() {
   const navigate = useNavigate();
+  const { showToast } = useToast();
   useTitle("Create Post");
   const postRef = collection(db, "posts");
 
@@ -35,6 +37,7 @@ export function CreatePost() {
       createdAt: serverTimestamp(),
     };
     await addDoc(postRef, document);
+    showToast({ type: "success", title: "Post created successfully" });
     navigate("/");
   }
 
@@ -79,7 +82,7 @@ export function CreatePost() {
         />
         <button
           type="submit"
-          className="w-full py-4 px-6 rounded-lg text-lg font-medium bg-green-600 text-white border-0 cursor-pointer hover:bg-green-700 transition-colors"
+          className="w-fit py-4 px-6 rounded-lg text-lg font-medium bg-green-600 text-white border-0 cursor-pointer hover:bg-green-700 transition-colors"
         >
           Create post
         </button>

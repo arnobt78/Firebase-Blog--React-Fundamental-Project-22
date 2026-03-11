@@ -7,6 +7,7 @@ import { doc, deleteDoc } from "firebase/firestore";
 import { Trash2, Pencil, ExternalLink } from "lucide-react";
 import { auth, db } from "../firebase/config";
 import { useAuth } from "../contexts/AuthContext";
+import { useToast } from "../contexts/ToastContext";
 import { Avatar } from "./Avatar";
 import { formatPostDate } from "../lib/formatDate";
 import type { Post } from "../types";
@@ -20,6 +21,7 @@ interface PostCardProps {
 export function PostCard({ post, toggle, setToggle }: PostCardProps) {
   const { id, title, description, author, createdAt } = post;
   const { isAuth } = useAuth();
+  const { showToast } = useToast();
   const canDelete = isAuth && auth.currentUser && author.id === auth.currentUser.uid;
   const canEdit = canDelete;
   const dateStr = formatPostDate(createdAt);
@@ -28,6 +30,7 @@ export function PostCard({ post, toggle, setToggle }: PostCardProps) {
   async function handleDelete() {
     const docRef = doc(db, "posts", id);
     await deleteDoc(docRef);
+    showToast({ type: "success", title: "Post deleted successfully" });
     setToggle(!toggle);
   }
 
